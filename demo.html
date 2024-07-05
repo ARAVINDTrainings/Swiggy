@@ -1,0 +1,45 @@
+#This is updated code
+
+1)OPEN BOTH PORTS
+80
+81
+
+2)create two directories app1 and app2 inside /var/www
+3)git clone application1 to app1
+4)git clone application2 to app2
+
+5)create two files app1.conf and app2.conf inside
+/etc/httpd/conf.d
+
+and keep content as below
+in both files
+
+<VirtualHost *:80>
+    DocumentRoot /var/www/app1
+    ServerName 3.81.135.170
+    <Directory "/var/www/app1">
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+<VirtualHost *:81>
+    DocumentRoot /var/www/app2
+    ServerName 3.81.135.170
+    <Directory "/var/www/app2">
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+6)Now change httpd.conf under /etc/httpd/conf
+
+add
+Listen 81
+
+Change as below for DocumentRoot
+
+DocumentRoot "/var/www/app1"
+DocumentRoot "/var/www/app2"
+
+
